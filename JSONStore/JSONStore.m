@@ -538,7 +538,7 @@
             
         } else {
             
-            NSLog(@"Error getting file attributes: %@", error);
+            NSLog(@"Error getting file attributes: %@", (*error).description);
             
             results = nil;
             break;
