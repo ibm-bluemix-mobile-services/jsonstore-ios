@@ -1,6 +1,6 @@
-# JSONStore iOS
+# JSONStore SDK 
 
-JSONStore is a lightweight, document-oriented storage system that enables persistent storage of JSON documents for Android applications.
+JSONStore is a lightweight, document-oriented storage system that enables persistent storage of JSON documents for iOS applications.
 
 # Features
 * A simple API that gives developers to add, store, replace, search through documents without memorizing query syntax

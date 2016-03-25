@@ -1,8 +1,8 @@
 Pod::Spec.new do |s|
 
   s.name         = 'JSONStore'
-  s.version      = '1.0.0'
-  s.summary      = 'JSONStore for iOS'
+  s.version      = '1.1.0'
+  s.summary      = 'JSONStore SDK for iOS'
 
   s.description  = <<-DESC
     JSONStore is a lightweight, document-oriented storage system that enables persistent storage of JSON documents for iOS applications.
