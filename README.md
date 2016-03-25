@@ -5,8 +5,20 @@ JSONStore is a lightweight, document-oriented storage system that enables persis
 # Features
 * A simple API that gives developers to add, store, replace, search through documents without memorizing query syntax
 * Ability to track local changes
+
+# Installation
+
+The JSONStore SDK is available via [Cocoapods](http://cocoapods.org/). To install, add the JSONStore pod to your Podfile.
+
+```Ruby
+platform :ios
+pod 'JSONStore'
+```
+
 	 
 # Usage
+
+**Note**: Import using `#import <JSONStore/JSONStoreFramework.h>`
 
 #### Initialize and open connections, get an Accessor, and add data
 ```Objective-C
@@ -70,7 +82,6 @@ JSONStore is a lightweight, document-oriented storage system that enables persis
 ```
 
 #### Replace - change the documents that are already stored inside a Collection
-
 ```Objective-C
 	// Get the accessor to an already initialized collection.
 	JSONStoreCollection* people = [[JSONStore sharedInstance] 	getCollectionWithName:@"people"];
@@ -78,14 +89,13 @@ JSONStore is a lightweight, document-oriented storage system that enables persis
 	// Find all documents that match the queries.
 	NSArray* docs = @[ @{@"_id" : @1, @"json" : @{ @"name": @"kenshin", @"age" : @99}} ];
 
-
 	// This object will point to an error if one occurs.
 	NSError* error = nil;
 
 	// Perform the replacement.
 	int docsReplaced = [[people replaceDocuments:docs andMarkDirty:NO error:&error] intValue];
 ```
-	
+
 #### Remove - delete all documents that match the query
 
 ```Objective-C
@@ -151,7 +161,7 @@ JSONStore is a lightweight, document-oriented storage system that enables persis
 
 	// Check if document with _id '1' is dirty.
 	int dirtyDocsCount = [[people countAllDirtyDocumentsWithError:&error] intValue];
-	```
+```
 
 #### Remove a Collection
 ```Objective-C
