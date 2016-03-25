@@ -171,6 +171,14 @@ additionalIndexes:(NSDictionary*) additionalIndexes
 -(BOOL) dropTable:(NSString*) collection;
 
 /**
+ Sets a password to access the store.
+ @param password Password
+ @return Success (true) or failure (false)
+ */
+-(BOOL) setDatabaseKey:(NSString*) password;
+
+
+/**
  Removes all data inside a collection.
  @param collection Name of the collection
  @return Success (true) or failure (false)
@@ -182,6 +190,17 @@ additionalIndexes:(NSDictionary*) additionalIndexes
  @return Success (true) or failure (false)
  */
 -(BOOL) close;
+
+/**
+ Changes the password that is used to open the store.
+ @param oldPwClear Old password
+ @param newPwClear New password
+ @param username User name
+ @return Success (true) or failure (false)
+ */
+-(BOOL) changePassword:(NSString*) oldPwClear
+           newPassword:(NSString*) newPwClear
+               forUser:(NSString*) username;
 
 
 /**
@@ -195,6 +214,14 @@ additionalIndexes:(NSDictionary*) additionalIndexes
  @return True if the store is opened, false otherwise
  */
 -(BOOL) isOpen;
+
+
+/**
+ Checks if the store is encrypted.
+ @return True if the store is encrypted, false otherwise
+ */
+-(BOOL) isStoreEncrypted;
+
 
 
 @end

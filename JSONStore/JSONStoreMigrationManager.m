@@ -21,6 +21,7 @@
 #import "JSONStoreConstants.h"
 #import "JSONStore.h"
 #import "JSONStore+Private.h"
+#import "JSONStoreSecurityManager.h"
 
 @implementation JSONStoreMigrationManager
 
@@ -119,5 +120,56 @@
         }
     }
 }
+
+-(int) checkForSecurityUpgrade:(NSString*) username
+                   andPassword:(NSString*) pwd
+{
+    if (self.checkedForSecurityUpgrade) {
+        
+        //We only need to check once
+        return JSON_STORE_RC_OK;
+    }
+    
+    self.checkedForSecurityUpgrade = YES;
+    
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSString* secVersion = [defaults valueForKey:JSON_STORE_SECURITY_VERSION_LABEL];
+    
+    if (secVersion == nil || ![secVersion isEqualToString:JSON_STORE_VERSION_2_0]) {
+        
+        //If they didn't pass 'jsonstore' as the user, they are using multi-user support
+        //which means they started with 5.0.6, skip migration, otherwise we migrate
+        if ([JSON_STORE_DEFAULT_USER isEqualToString:username]) {
+            
+            //Do the actual migration here
+            JSONStoreSecurityManager* mgr = [[JSONStoreSecurityManager alloc] initWithUsername:username];
+            
+            NSString* dpk = [mgr getDPK:pwd];
+            
+            if (dpk == nil) {
+                
+                NSLog(@"JSON_STORE_PROVISION_KEY_FAILURE. An error occurred retrieving data during JSONStore migration, username: %@, secMgr username: %@, pwd length: %d", username, mgr != nil ? mgr.username : @"nil", [pwd length]);
+                
+                return JSON_STORE_PROVISION_KEY_FAILURE;
+            }
+            
+            BOOL worked = [mgr changeOldPassword:pwd toNewPassword:pwd];
+            
+            if (! worked) {
+                
+                NSLog(@"JSON_STORE_PERSISTENT_STORE_FAILURE. An error occurred storing data during JSONStore migration, pwd length: %d", [pwd length]);
+                
+                return JSON_STORE_PERSISTENT_STORE_FAILURE;
+            }
+        }
+        
+        [defaults setValue:JSON_STORE_VERSION_2_0 forKey:JSON_STORE_SECURITY_VERSION_LABEL];
+        [defaults synchronize];
+    }
+    
+    return JSON_STORE_RC_OK;
+}
+
 
 @end

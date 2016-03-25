@@ -24,15 +24,20 @@
 @property (nonatomic, strong) NSString* username;
 
 /**
- Set to true only if OS security is available (Touch ID or PIN on iOS).
- The JSONStore fails to open on devices without OS Security if this property is set to true.
- */
-@property (nonatomic) BOOL requireOperatingSystemSecurity;
-
-/**
  The message to present to the user if OS Security is enabled.
  */
 @property (nonatomic) NSString* operatingSystemSecurityMessage;
+
+/**
+ The password.
+ */
+@property (nonatomic, strong) NSString* password;
+
+/**
+ The secure random that is used for the Data Protection Key (DPK).
+ */
+@property (nonatomic, strong) NSString* secureRandom;
+
 
 
 @end

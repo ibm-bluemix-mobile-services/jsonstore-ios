@@ -18,6 +18,7 @@
 #import "JSONStore.h"
 #import "JSONStore+Private.h"
 #import "JSONStoreQueue.h"
+#import "JSONStoreSecurityManager.h"
 
 static JSONStoreQueue* _jsqSingleton = nil;
 
@@ -70,6 +71,33 @@ static JSONStoreQueue* _jsqSingleton = nil;
     
     dispatch_sync(self.operationQueue, ^{
         setKeyWorked = [self.store isOpen];
+    });
+    
+    return setKeyWorked;
+}
+
+-(BOOL) setDatabaseKey:(NSString*) password
+{
+    __block BOOL setKeyWorked = NO;
+    
+    dispatch_sync(self.operationQueue, ^{
+        
+        //Need to derive the key from clear text
+        JSONStoreSecurityManager *jsonsecmanager = [[JSONStoreSecurityManager alloc]
+                                                    initWithUsername:self.username];
+        
+        NSString* key = [jsonsecmanager getDPK:password];
+        
+        if (key != nil && [key length] > 0) {
+            
+            setKeyWorked = [self.store setDatabaseKey:key];
+            
+        } else {
+            
+            NSLog(@"Invalid password, pwd length: %d, security manager username: %@, username: %@", [password length], jsonsecmanager != nil ? jsonsecmanager.username : @"nil", self.username);
+            
+            setKeyWorked = NO;
+        }
     });
     
     return setKeyWorked;
@@ -282,6 +310,22 @@ additionalIndexes:(NSDictionary*) additionalIndexes
     });
     
     return numWorked;
+}
+
+-(BOOL) changePassword: (NSString*) oldPwClear
+           newPassword: (NSString*) newPwClear
+               forUser: (NSString*) username
+{
+    
+    __block BOOL result = NO;
+    
+    dispatch_sync(self.operationQueue, ^{
+        result =  [[[JSONStoreSecurityManager alloc] initWithUsername:username]
+                   changeOldPassword:oldPwClear
+                   toNewPassword:newPwClear];
+    });
+    
+    return result;
 }
 
 -(BOOL) dropTable: (NSString*)collection
