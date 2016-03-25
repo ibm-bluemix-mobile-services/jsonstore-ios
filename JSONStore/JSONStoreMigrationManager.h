@@ -40,4 +40,11 @@
  Checks if a migration update is required and executes the migration code.
  */
 -(void) checkForUpgrade;
+
+/**
+ Checks if a migration update is required and executes the security migration code.
+ */
+-(int) checkForSecurityUpgrade:(NSString*) username
+                   andPassword:(NSString*) pwd;
+
 @end

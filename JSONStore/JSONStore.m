@@ -19,6 +19,9 @@
 #import "JSONStore.h"
 #import "JSONStoreQueue.h"
 #import "JSONStoreMigrationManager.h"
+#import "JSONStoreSecurityManager.h"
+#import "JSONStoreSecurityUtils.h"
+#import "JSONStoreLogger.h"
 
 @implementation JSONStore
 
@@ -41,8 +44,10 @@
 {
     int rc = 0;
     BOOL worked = YES;
-
+    
     @try {
+        
+        long long startTime = wlGetTimeIntervalSince1970();
         
         if (self._accessors == nil) {
             self._accessors = [[NSMutableDictionary alloc] init];
@@ -63,6 +68,43 @@
             
         }
         
+        NSString* usr = options.username ? options.username : JSON_STORE_DEFAULT_USER;
+        
+        if ([options.password length]) {
+            
+            JSONStoreSecurityManager* secMgr = [[JSONStoreSecurityManager alloc]
+                                                initWithUsername:usr];
+            
+            BOOL keyChainIsFullyPopulated = [secMgr isKeyChainFullyPopulated];
+            
+            if (! keyChainIsFullyPopulated) {
+                
+                NSString* salt = [JSONStoreSecurityUtils generateRandomStringWithBytes:JSON_STORE_DEFAULT_SALT_SIZE];
+                
+                BOOL storeDPKWorked = [self _storeDataProtectionKeyForUsername:options.username
+                                                                      withSalt:salt
+                                                                  withDPKClear:options.secureRandom
+                                                                  withCBKClear:options.password
+                                                           withSecurityManager:secMgr];
+                
+                if (! storeDPKWorked) {
+                    
+                    worked = NO;
+                    rc = JSON_STORE_STORE_DATA_PROTECTION_KEY_FAILURE;
+                    
+                    NSLog(@"Error: JSON_STORE_STORE_DATA_PROTECTION_KEY_FAILURE, code: %d, username: %@, salt length: %d, dpkClear length: %d, cbkClear length: %d, securityMgr username: %@", rc, options.username, salt != nil ? [salt length] : 0, options.secureRandom != nil ? [options.secureRandom length] : 0, options.password != nil ? [options.password length] : 0, secMgr != nil ? secMgr.username : @"nil");
+                    
+                    if (error != nil) {
+                        *error = [NSError errorWithDomain:JSON_STORE_EXCEPTION
+                                                     code:rc
+                                                 userInfo:nil];
+                    }
+                    
+                }
+                
+            }
+        }
+        
         if (worked) {
             
             for (JSONStoreCollection *currentCollection in collections) {
@@ -71,8 +113,11 @@
                                withSearchFields:currentCollection.searchFields
                      withAdditionalSearchFields:currentCollection.additionalSearchFields
                                    withUsername:options.username
+                                   withPassword:options.password
                                   withDropFirst:currentCollection._dropFirst
                                           error:error];
+                
+                NSLog(currentCollection.collectionName, @"open", startTime, rc);
                 
                 if (rc == JSON_STORE_RC_OK || rc == JSON_STORE_PROVISION_TABLE_EXISTS) {
                     
@@ -97,11 +142,14 @@
     @catch (NSException *exception) {
         worked = NO;
         rc = JSON_STORE_PERSISTENT_STORE_FAILURE;
-        NSLog(@"Exception: %@", exception);
+        NSLog(@"Exception : %@", exception);
     }
-
+    
     return worked;
 }
+
+
+
 
 -(JSONStoreCollection*) getCollectionWithName: (NSString*) collectionName
 {    
@@ -113,6 +161,8 @@
 {
     BOOL worked = YES;
     int rc = 0;
+    
+    long long startTime = wlGetTimeIntervalSince1970();
 
     @try {
         
@@ -171,6 +221,71 @@
         rc = JSON_STORE_PERSISTENT_STORE_FAILURE;
         NSLog(@"Exception: %@", exception);
     }
+    @finally{
+        NSLog(@"", @"closeAll", startTime, rc);
+    }
+    
+    return worked;
+}
+
+
+-(BOOL) changeCurrentPassword: (NSString*) oldPassword
+              withNewPassword: (NSString*) newPassword
+                  forUsername: (NSString*) username
+                        error: (NSError**) error
+{
+    BOOL worked = YES;
+    int rc = 0;
+    
+    long long startTime = wlGetTimeIntervalSince1970();
+    
+    @try {
+        JSONStoreQueue* accessor = [JSONStoreQueue sharedManager];
+        
+        if(! accessor || ![self _checkIfDBIsOpened]) {
+            
+            worked = NO;
+            rc = JSON_STORE_DATABASE_NOT_OPEN;
+            
+            NSLog(@"Error: JSON_STORE_DATABASE_NOT_OPEN, code: %d, accessor: %@, _checkIfDBIsOpened: %@", rc, accessor, [self _checkIfDBIsOpened] ? @"YES" : @"NO");
+            
+            if (error != nil) {
+                *error = [NSError errorWithDomain:JSON_STORE_EXCEPTION
+                                             code:rc
+                                         userInfo:nil];
+            }
+            
+        } else {
+            
+            worked = [accessor changePassword:oldPassword
+                                  newPassword:newPassword
+                                      forUser:username];
+            
+            
+            if (! worked) {
+                
+                rc = JSON_STORE_ERROR_CHANGING_PASSWORD;
+                
+                NSLog(@"Error: JSON_STORE_ERROR_CHANGING_PASSWORD, code: %d, username: %@, newPwdLength: %d, oldPwdLength: %d", rc, username, [newPassword length], [oldPassword length]);
+                
+                if (error != nil) {
+                    *error = [NSError errorWithDomain:JSON_STORE_EXCEPTION
+                                                 code:rc
+                                             userInfo:nil];
+                }
+            }
+        }
+    }
+    @catch (NSException *exception) {
+        worked = NO;
+        rc = JSON_STORE_PERSISTENT_STORE_FAILURE;
+        NSLog(@"Exception: %@", exception);
+    }
+    @finally {
+        NSLog(@"", @"changePassword", startTime, rc);
+        oldPassword = nil;
+        newPassword = nil;
+    }
     
     return worked;
 }
@@ -181,6 +296,9 @@
 {
     BOOL worked = YES;
     int rc = 0;
+    
+    long long startTime = wlGetTimeIntervalSince1970();
+    
     
     @try {
         if (self._transactionActive) {
@@ -202,6 +320,20 @@
             if (accessor) {
                 [accessor close];
             }
+            
+            
+            NSString * realUsernameToRemoveDPK = [username isEqualToString:@"jsonstore"] ? JSON_STORE_KEY_DOCUMENT_ID : username;
+            
+            NSString* jsonstoreKey = [JSONStoreSecurityManager _dpkIdentifierWithBundleId];
+            
+            //Query to remove security metadata from the keychain
+            NSDictionary* removeQuery = @{(__bridge id) kSecClass : (__bridge id) kSecClassGenericPassword,
+                                          (__bridge id) kSecAttrAccount : realUsernameToRemoveDPK,
+                                          (__bridge id) kSecAttrService : jsonstoreKey};
+            
+            OSStatus err = SecItemDelete((__bridge CFDictionaryRef) removeQuery);
+         
+            if (err == noErr || err ==  errSecItemNotFound) {
             
                  //Removing files from keychain worked
                 
@@ -240,12 +372,28 @@
                     worked = YES;
                 }
                 
-            } 
+            } else {
+                    
+                    //Failure removing keychain item
+                    worked = NO;
+                    rc = DESTROY_FAILED_METADATA_REMOVAL_FAILURE;
+                    
+                    if (error != nil) {
+                        *error = [NSError errorWithDomain:JSON_STORE_EXCEPTION
+                                                     code:rc
+                                                 userInfo:nil];
+                    }
+                }
+
+            }
         }
     @catch (NSException *exception) {
         worked = NO;
         rc = JSON_STORE_PERSISTENT_STORE_FAILURE;
         NSLog(@"Exception: %@", exception);
+    }
+    @finally {
+        NSLog(@"", @"destroy", startTime, rc);
     }
     
     return worked;
@@ -255,6 +403,8 @@
 {
     BOOL worked = YES;
     int rc = 0;
+    
+    long long startTime = wlGetTimeIntervalSince1970();
 
     
     @try {
@@ -303,6 +453,9 @@
         rc = JSON_STORE_PERSISTENT_STORE_FAILURE;
         NSLog(@"Exception : %@", exception);
     }
+    @finally {
+        NSLog(@"", @"destroy", startTime, rc);
+    }
     
     return worked;
 }
@@ -311,6 +464,8 @@
 {
     BOOL worked = YES;
     int rc = 0;
+    
+    long long startTime = wlGetTimeIntervalSince1970();
     
     @try {
         JSONStoreQueue* accessor = [JSONStoreQueue sharedManager];
@@ -371,6 +526,9 @@
         rc = JSON_STORE_PERSISTENT_STORE_FAILURE;
         NSLog(@"Exception: %@", exception);
     }
+    @finally{
+        NSLog(@"", "startTransaction", startTime, rc);
+    }
     
     return worked;
 }
@@ -379,6 +537,8 @@
 {
     BOOL worked = YES;
     int rc = 0;
+    
+    long long startTime = wlGetTimeIntervalSince1970();
 
     @try {
         JSONStoreQueue* accessor = [JSONStoreQueue sharedManager];
@@ -437,6 +597,9 @@
         rc = JSON_STORE_PERSISTENT_STORE_FAILURE;
         NSLog(@"Exception: %@", exception);
     }
+    @finally {
+        NSLog(@"", @"commitTransaction", startTime, rc);
+    }
     
     return worked;
 }
@@ -445,6 +608,8 @@
 {
     BOOL worked = YES;
     int rc = 0;
+    
+    long long startTime = wlGetTimeIntervalSince1970();
 
     @try {
         JSONStoreQueue* accessor = [JSONStoreQueue sharedManager];
@@ -503,6 +668,9 @@
         rc = JSON_STORE_PERSISTENT_STORE_FAILURE;
         NSLog(@"Exception: %@", exception);
     }
+    @finally {
+        NSLog(@"", @"rollbackTransaction", startTime, rc);
+    }
     
     return worked;
 }
@@ -520,7 +688,7 @@
     NSDirectoryEnumerator* enumerator = [fileManager enumeratorAtPath:[folderPath path]];
     
     NSString* file;
-
+    
     while ( (file = [enumerator nextObject]) ) {
         
         NSString* currentFilePath = [[folderPath URLByAppendingPathComponent:file] path];
@@ -528,17 +696,32 @@
         NSDictionary* fileAttributes = [fileManager attributesOfItemAtPath:currentFilePath error:error];
         
         if (fileAttributes) {
-        
+            
+            //Check if file is encrypted
+            NSData* searchData = [@"SQLite" dataUsingEncoding:NSUTF8StringEncoding];
+            
+            NSData* fileData = [[NSFileHandle fileHandleForReadingAtPath:currentFilePath]
+                                readDataOfLength:16];
+            
+            NSRange locatedRange = [fileData rangeOfData:searchData
+                                                 options:kNilOptions
+                                                   range:NSMakeRange(0, [fileData length])];
+            
+            BOOL isStoreEncrypted = (locatedRange.location == NSNotFound);
+
+
+            
             //File size
             NSNumber* currentFileSize = @([fileAttributes fileSize]);
             
             //Populate return value
             [results addObject:@{JSON_STORE_KEY_FILE_NAME : [file stringByReplacingOccurrencesOfString:JSON_STORE_DB_FILE_EXTENSION withString:@""],
-                                 JSON_STORE_KEY_FILE_SIZE : currentFileSize}];
+                                 JSON_STORE_KEY_FILE_SIZE : currentFileSize,
+                                 JSON_STORE_KEY_FILE_IS_ENCRYPTED : @(isStoreEncrypted)}];
             
         } else {
             
-            NSLog(@"Error getting file attributes: %@", (*error).description);
+            NSLog(@"Error getting file attributes: %@", error);
             
             results = nil;
             break;
@@ -560,6 +743,28 @@
     return self._transactionActive;
 }
 
+-(BOOL) _isStoreEncryptedAndReturnError:(NSError**) error
+{
+    JSONStoreQueue* accessor = [JSONStoreQueue sharedManager];
+    
+    if (! accessor) {
+        
+        NSLog(@"Error: JSON_STORE_DATABASE_NOT_OPEN, code: %d", JSON_STORE_DATABASE_NOT_OPEN);
+        
+        if (error != nil) {
+            *error = [NSError errorWithDomain:JSON_STORE_EXCEPTION
+                                         code:JSON_STORE_DATABASE_NOT_OPEN
+                                     userInfo:nil];
+        }
+        
+        return NO;
+    }
+    
+    BOOL isEnc = [accessor isStoreEncrypted];
+    
+    return isEnc;
+}
+
 
 -(void) _removeAccessor:(NSString*)collectionName
 {
@@ -572,6 +777,7 @@
            withSearchFields: (NSDictionary*) searchFields
  withAdditionalSearchFields: (NSDictionary*) additionalIndexes
                withUsername: (NSString*) username
+               withPassword: (NSString*) password
               withDropFirst: (BOOL) dropFirst
                       error: (NSError**) error
 {
@@ -601,6 +807,31 @@
     }
     
     
+#if USE_SQLCIPHER
+    if ([password length]) {
+        
+        rc = [[JSONStoreMigrationManager sharedInstance] checkForSecurityUpgrade:username
+                                                                     andPassword:password];
+        
+        BOOL setDBKeyWorked = [accessor setDatabaseKey:password];
+        
+        if (rc == 0 && !setDBKeyWorked) {
+            
+            NSLog(@"Error: JSON_STORE_PROVISION_KEY_FAILURE, code: %d, checkForSecurityUpgrade return code: %d, setDBKeyWorked: %@", JSON_STORE_PROVISION_KEY_FAILURE, rc, setDBKeyWorked ? @"YES" : @"NO");
+            
+            if (error != nil) {
+                *error = [NSError errorWithDomain:JSON_STORE_EXCEPTION
+                                             code:JSON_STORE_PROVISION_KEY_FAILURE
+                                         userInfo:nil];
+            }
+            
+            return JSON_STORE_PROVISION_KEY_FAILURE;
+        }
+    }
+#else 
+    NSLog(@"SQLCIPHER IS DISABLED");
+#endif
+    
     if (rc == 0) {
         
         if (dropFirst) {
@@ -622,11 +853,41 @@
                                          code:rc
                                      userInfo:nil];
         }
-    
+        
         [accessor close];
     }
     
     return rc;
+}
+
+-(BOOL) _storeDataProtectionKeyForUsername:(NSString*) username
+                                  withSalt:(NSString*) salt
+                              withDPKClear:(NSString*) dpkClear
+                              withCBKClear:(NSString*) cbkClear
+                       withSecurityManager:(JSONStoreSecurityManager*) securityMgr
+{
+    
+    BOOL worked;
+    
+    if (dpkClear != nil && [dpkClear length]) {
+        
+        worked = [securityMgr storeDPK:dpkClear usingPassword:cbkClear withSalt:salt];
+        
+    } else {
+        
+        worked = [securityMgr generateAndStoreDpkUsingPassword:cbkClear withSalt:salt];
+    }
+    
+    if (worked && [JSON_STORE_DEFAULT_USER isEqualToString:username]) {
+        
+        [self _updateSecurityVersion];
+    }
+    
+    dpkClear = nil;
+    cbkClear = nil;
+    salt = nil;
+    
+    return worked;
 }
 
 
@@ -651,6 +912,8 @@
     
     return YES;
 }
+
+
 
 
 -(void) _clearUserDefaults

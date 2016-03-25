@@ -18,13 +18,19 @@ Pod::Spec.new do |s|
 
 
 
-  s.source_files  = 'JSONStore', 'JSONStore/**/*.{h,m}'
+  s.source_files  = 'JSONStore', 'JSONStore/**/*.{h,m}', 'SQLCipher.framework'
   s.exclude_files = 'JSONStore/Exclude'
 
   s.requires_arc = true
 
-  s.libraries = 'sqlite3'
-
   s.module_map = 'module.modulemap'
+
+  s.preserve_paths = 'Frameworks/'
+
+  s.xcconfig = { 'OTHER_LDFLAGS' => '-framework SQLCipher', 'FRAMEWORK_SEARCH_PATHS'=> "$(PODS_ROOT)/Frameworks/**" }
+
+
+
+
 
 end

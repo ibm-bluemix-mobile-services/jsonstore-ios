@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F3B47191CA2FE92001EA3E1 /* JSONStoreSecurityConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F3B47131CA2FE92001EA3E1 /* JSONStoreSecurityConstants.h */; };
+		5F3B471A1CA2FE92001EA3E1 /* JSONStoreSecurityConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B47141CA2FE92001EA3E1 /* JSONStoreSecurityConstants.m */; };
+		5F3B471B1CA2FE92001EA3E1 /* JSONStoreSecurityUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F3B47151CA2FE92001EA3E1 /* JSONStoreSecurityUtils.h */; };
+		5F3B471C1CA2FE92001EA3E1 /* JSONStoreSecurityUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B47161CA2FE92001EA3E1 /* JSONStoreSecurityUtils.m */; };
+		5F3B471D1CA2FE92001EA3E1 /* JSONStoreSecurityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F3B47171CA2FE92001EA3E1 /* JSONStoreSecurityManager.h */; };
+		5F3B471E1CA2FE92001EA3E1 /* JSONStoreSecurityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B47181CA2FE92001EA3E1 /* JSONStoreSecurityManager.m */; };
+		5F3B47221CA30510001EA3E1 /* JSONStoreLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F3B47211CA30510001EA3E1 /* JSONStoreLogger.h */; };
 		5FC3263E1C89FF5200701994 /* JSONStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FC3263D1C89FF5200701994 /* JSONStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5FC326451C89FF5200701994 /* JSONStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FC3263A1C89FF5200701994 /* JSONStore.framework */; };
 		5FC3264A1C89FF5200701994 /* JSONStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC326491C89FF5200701994 /* JSONStoreTests.m */; };
@@ -60,6 +67,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5F3B47131CA2FE92001EA3E1 /* JSONStoreSecurityConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONStoreSecurityConstants.h; sourceTree = "<group>"; };
+		5F3B47141CA2FE92001EA3E1 /* JSONStoreSecurityConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONStoreSecurityConstants.m; sourceTree = "<group>"; };
+		5F3B47151CA2FE92001EA3E1 /* JSONStoreSecurityUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONStoreSecurityUtils.h; sourceTree = "<group>"; };
+		5F3B47161CA2FE92001EA3E1 /* JSONStoreSecurityUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONStoreSecurityUtils.m; sourceTree = "<group>"; };
+		5F3B47171CA2FE92001EA3E1 /* JSONStoreSecurityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONStoreSecurityManager.h; sourceTree = "<group>"; };
+		5F3B47181CA2FE92001EA3E1 /* JSONStoreSecurityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONStoreSecurityManager.m; sourceTree = "<group>"; };
+		5F3B47211CA30510001EA3E1 /* JSONStoreLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONStoreLogger.h; sourceTree = "<group>"; };
+		5F3B476B1CA322B9001EA3E1 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = SOURCE_ROOT; };
+		5F3B49791CA59F72001EA3E1 /* SQLCipher.framework */ = {isa = PBXFileReference; lastKnownFileType = text; name = SQLCipher.framework; path = ../XcodeWorkspace/SQLCipher.framework; sourceTree = "<group>"; };
 		5FC3263A1C89FF5200701994 /* JSONStore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JSONStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FC3263D1C89FF5200701994 /* JSONStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONStore.h; sourceTree = "<group>"; };
 		5FC3263F1C89FF5200701994 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -105,7 +121,6 @@
 		5FFF9E211C8BABB900F79A1B /* JSONStoreOpenOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONStoreOpenOptions.m; sourceTree = "<group>"; };
 		5FFF9E271C8E1A1D00F79A1B /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		5FFF9E2B1C8F7B8100F79A1B /* JSONStoreFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONStoreFramework.h; sourceTree = "<group>"; };
-		5FFF9E2C1C8F7EE000F79A1B /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +143,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5F3B47121CA2FE86001EA3E1 /* Security */ = {
+			isa = PBXGroup;
+			children = (
+				5F3B47131CA2FE92001EA3E1 /* JSONStoreSecurityConstants.h */,
+				5F3B47141CA2FE92001EA3E1 /* JSONStoreSecurityConstants.m */,
+				5F3B47151CA2FE92001EA3E1 /* JSONStoreSecurityUtils.h */,
+				5F3B47161CA2FE92001EA3E1 /* JSONStoreSecurityUtils.m */,
+				5F3B47171CA2FE92001EA3E1 /* JSONStoreSecurityManager.h */,
+				5F3B47181CA2FE92001EA3E1 /* JSONStoreSecurityManager.m */,
+			);
+			name = Security;
+			sourceTree = "<group>";
+		};
 		5FC326301C89FF5200701994 = {
 			isa = PBXGroup;
 			children = (
@@ -150,6 +178,7 @@
 		5FC3263C1C89FF5200701994 /* JSONStore */ = {
 			isa = PBXGroup;
 			children = (
+				5F3B47121CA2FE86001EA3E1 /* Security */,
 				5FC326AD1C8A019E00701994 /* Supporting Files */,
 				5FC326A01C8A00B500701994 /* Categories */,
 				5FC326791C8A004900701994 /* Internal */,
@@ -190,6 +219,7 @@
 		5FC326791C8A004900701994 /* Internal */ = {
 			isa = PBXGroup;
 			children = (
+				5F3B47211CA30510001EA3E1 /* JSONStoreLogger.h */,
 				5FC3267B1C8A008F00701994 /* JSONStoreIndexer.h */,
 				5FC3267C1C8A008F00701994 /* JSONStoreIndexer.m */,
 				5FC3267D1C8A008F00701994 /* JSONStoreSchema.h */,
@@ -231,7 +261,7 @@
 			children = (
 				5FC3263F1C89FF5200701994 /* Info.plist */,
 				5FC326AE1C8A01F800701994 /* PrefixHeader.pch */,
-				5FFF9E2C1C8F7EE000F79A1B /* module.modulemap */,
+				5F3B476B1CA322B9001EA3E1 /* module.modulemap */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -239,6 +269,7 @@
 		5FFF9E291C8E1ABA00F79A1B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5F3B49791CA59F72001EA3E1 /* SQLCipher.framework */,
 				5FFF9E271C8E1A1D00F79A1B /* libsqlite3.tbd */,
 			);
 			name = Frameworks;
@@ -262,7 +293,9 @@
 				5FC326941C8A008F00701994 /* JSONStoreConstants.h in Headers */,
 				5FC326AB1C8A00C100701994 /* NSString+WLJSON.h in Headers */,
 				5FC326981C8A008F00701994 /* JSONStoreQueue.h in Headers */,
+				5F3B471D1CA2FE92001EA3E1 /* JSONStoreSecurityManager.h in Headers */,
 				5FC326931C8A008F00701994 /* JSONStoreCollection+Private.h in Headers */,
+				5F3B471B1CA2FE92001EA3E1 /* JSONStoreSecurityUtils.h in Headers */,
 				5FC3268E1C8A008F00701994 /* JSONStoreIndexer.h in Headers */,
 				5FC3269E1C8A008F00701994 /* JSONStoreMigrationManager.h in Headers */,
 				5FC326961C8A008F00701994 /* JSONStoreDatabaseManager.h in Headers */,
@@ -271,6 +304,8 @@
 				5FC326901C8A008F00701994 /* JSONStoreSchema.h in Headers */,
 				5FC3269A1C8A008F00701994 /* JSONStoreSQLLite.h in Headers */,
 				5FC326A71C8A00C100701994 /* NSData+WLJSON.h in Headers */,
+				5F3B47221CA30510001EA3E1 /* JSONStoreLogger.h in Headers */,
+				5F3B47191CA2FE92001EA3E1 /* JSONStoreSecurityConstants.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,6 +405,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5FC326651C89FFDD00701994 /* JSONStoreAddOptions.m in Sources */,
+				5F3B471C1CA2FE92001EA3E1 /* JSONStoreSecurityUtils.m in Sources */,
 				5FC3269F1C8A008F00701994 /* JSONStoreMigrationManager.m in Sources */,
 				5FC326971C8A008F00701994 /* JSONStoreDatabaseManager.m in Sources */,
 				5FC326671C89FFDD00701994 /* JSONStoreQueryPart.m in Sources */,
@@ -378,10 +414,12 @@
 				5FC326631C89FFDD00701994 /* JSONStoreCollection.m in Sources */,
 				5FC326551C89FFCB00701994 /* JSONStore.m in Sources */,
 				5FFF9E231C8BABB900F79A1B /* JSONStoreOpenOptions.m in Sources */,
+				5F3B471A1CA2FE92001EA3E1 /* JSONStoreSecurityConstants.m in Sources */,
 				5FC326911C8A008F00701994 /* JSONStoreSchema.m in Sources */,
 				5FC326AC1C8A00C100701994 /* NSString+WLJSON.m in Sources */,
 				5FC3269B1C8A008F00701994 /* JSONStoreSQLLite.m in Sources */,
 				5FC3269D1C8A008F00701994 /* JSONStoreValidator.m in Sources */,
+				5F3B471E1CA2FE92001EA3E1 /* JSONStoreSecurityManager.m in Sources */,
 				5FC326691C89FFDD00701994 /* JSONStoreQueryOptions.m in Sources */,
 				5FC326AA1C8A00C100701994 /* NSObject+WLJSON.m in Sources */,
 				5FC326951C8A008F00701994 /* JSONStoreConstants.m in Sources */,
@@ -503,6 +541,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = JSONStore/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -521,11 +563,15 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = JSONStore/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "$(PROJECT_DIR)/module.module,ap";
+				MODULEMAP_FILE = "$(PROJECT_DIR)/module.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ios.jsonstore.JSONStore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

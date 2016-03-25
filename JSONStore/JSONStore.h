@@ -112,13 +112,11 @@
 
 /**
  Private. Boolean that determines if OS Security is used
- @since IBM Worklight V6.3.0
  */
 @property (nonatomic) BOOL _requireOperatingSystemSecurity;
 
 /**
  Private. NSString for the message to be presented to user if OS Security is enabled
- @since IBM Worklight V6.3.0
  */
 @property (nonatomic) NSString* _operatingSystemSecurityMessage;
 

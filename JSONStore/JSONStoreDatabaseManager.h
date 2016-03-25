@@ -12,7 +12,12 @@
  */
 
 #import <Foundation/Foundation.h>
-#import <sqlite3.h>
+
+#ifdef USE_SQLCIPHER
+    #import <SQLCipher/sqlite3.h>
+#else
+    #import <sqlite3.h>
+#endif
 
 /**
  Contains operations that work directly on the database.
