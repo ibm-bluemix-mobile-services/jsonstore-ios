@@ -24,10 +24,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.module_map = 'module.modulemap'
-
-  s.preserve_paths = 'Frameworks/'
-
-  s.xcconfig = { 'OTHER_LDFLAGS' => '-framework SQLCipher', 'FRAMEWORK_SEARCH_PATHS'=> "$(PODS_ROOT)/Frameworks/**" }
+  s.xcconfig = {'FRAMEWORK_SEARCH_PATHS'=> "$(PODS_ROOT)/Frameworks/**" }
 
 
 

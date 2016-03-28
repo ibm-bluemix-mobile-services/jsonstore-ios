@@ -829,7 +829,7 @@
         }
     }
 #else 
-    NSLog(@"SQLCIPHER IS DISABLED");
+    NSLog(@"ENCRYPTION IS DISABLED");
 #endif
     
     if (rc == 0) {

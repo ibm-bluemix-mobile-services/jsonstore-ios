@@ -52,7 +52,6 @@
 		5FC326AC1C8A00C100701994 /* NSString+WLJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC326A61C8A00C100701994 /* NSString+WLJSON.m */; };
 		5FFF9E221C8BABB900F79A1B /* JSONStoreOpenOptions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FFF9E201C8BABB900F79A1B /* JSONStoreOpenOptions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5FFF9E231C8BABB900F79A1B /* JSONStoreOpenOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFF9E211C8BABB900F79A1B /* JSONStoreOpenOptions.m */; };
-		5FFF9E281C8E1A1D00F79A1B /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FFF9E271C8E1A1D00F79A1B /* libsqlite3.tbd */; };
 		5FFF9E2F1C8F81A500F79A1B /* JSONStoreFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FFF9E2B1C8F7B8100F79A1B /* JSONStoreFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -128,7 +127,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5FFF9E281C8E1A1D00F79A1B /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -549,7 +547,9 @@
 				INFOPLIST_FILE = JSONStore/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = mh_dylib;
 				MODULEMAP_FILE = "$(PROJECT_DIR)/module.modulemap";
+				OTHER_LDFLAGS = "-l\"sqlite3\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ios.jsonstore.JSONStore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -571,7 +571,9 @@
 				INFOPLIST_FILE = JSONStore/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = mh_dylib;
 				MODULEMAP_FILE = "$(PROJECT_DIR)/module.modulemap";
+				OTHER_LDFLAGS = "-l\"sqlite3\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ios.jsonstore.JSONStore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
