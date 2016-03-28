@@ -33,7 +33,7 @@ post_install do |installer|
 end
 ```
 
-Also, you will need to set the `MACH_O_TYPE` JSONStore target in `Build Settings` as Dynamic. For instructions on how to do preview the following [blog]().
+Also, you will need to set the `MACH_O_TYPE` JSONStore target under the Pod project in `Build Settings` as Dynamic. For instructions on how to do this preview the following [blog]().
 
 	 
 # Usage
