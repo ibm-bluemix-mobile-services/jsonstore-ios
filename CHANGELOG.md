@@ -1,6 +1,6 @@
 # Change Log
 
-## [1.1.0](https://github.com/ibm-bluemix-mobile-services/jsonstore-ios/tree/1.1.0) (2016-03-25)
+## [1.1.0](https://github.com/ibm-bluemix-mobile-services/jsonstore-ios/tree/1.1.0) (2016-03-28)
 [Full Changelog](https://github.com/ibm-bluemix-mobile-services/jsonstore-ios/compare/1.0.0...1.1.0)
 
 ## [1.0.0](https://github.com/ibm-bluemix-mobile-services/jsonstore-ios/tree/1.0.0) (2016-03-22)
