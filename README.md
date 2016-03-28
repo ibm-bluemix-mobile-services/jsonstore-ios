@@ -13,7 +13,27 @@ The JSONStore SDK is available via [Cocoapods](http://cocoapods.org/). To instal
 ```Ruby
 platform :ios
 pod 'JSONStore'
+pod 'sqlite3'
 ```
+
+#Security
+
+To use the encryption feature in JSONStore you will need to add the following to your `Podfile` and remove `pod 'sqlite3'`
+
+```Ruby
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+		if target.name.include? 'JSONStore'
+            target.build_configurations.each do |config|
+                config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] = 'USE_SQLCIPHER'
+                config.build_settings['OTHER_LDFLAGS'] = '-framework "SQLCipher"'
+            end
+        end
+    end
+end
+```
+
+Also, you will need to set the `MACH_O_TYPE` JSONStore target in `Build Settings` as Dynamic. For instructions on how to do preview the following [blog]().
 
 	 
 # Usage
