@@ -337,7 +337,7 @@
     return mRC;
 }
 
--(BOOL) insert: (NSString *)sql, ...
+-(BOOL) insertStmt: (NSString *)sql, ...
 {
     __block struct {
         va_list args;

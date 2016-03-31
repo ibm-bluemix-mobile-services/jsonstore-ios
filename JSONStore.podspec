@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = 'JSONStore'
-  s.version      = '1.1.0'
+  s.version      = '1.2.0'
   s.summary      = 'JSONStore SDK for iOS'
 
   s.description  = <<-DESC
@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
 
   s.author             = { 'IBM Bluemix Mobile Services' => 'mobilesdk@us.ibm.com' }
   
-  s.source       = { :git => 'https://github.com/ibm-bluemix-mobile-services/jsonstore-ios.git', :tag => '1.1.0'}
+  s.source       = { :git => 'https://github.com/ibm-bluemix-mobile-services/jsonstore-ios.git', :tag => '1.2.0'}
 
 
 
@@ -24,10 +24,6 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.module_map = 'module.modulemap'
-  s.xcconfig = {'FRAMEWORK_SEARCH_PATHS'=> "$(PODS_ROOT)/Frameworks/**" }
-
-
-
 
 
 end

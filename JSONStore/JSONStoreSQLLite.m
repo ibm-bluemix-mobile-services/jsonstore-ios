@@ -554,7 +554,7 @@ inCollection:(NSString*) collection
     NSString* insertStmt = [NSString stringWithFormat:@"insert into '%@' (%@) values (%@)",
                             collection, fieldsStr, valuesStr];
     
-    BOOL worked = [self.dbMgr insert:insertStmt, fieldValues];
+    BOOL worked = [self.dbMgr insertStmt:insertStmt, fieldValues];
     
     if (! worked) {
         NSLog(@"Store operation failed, collection: %@", collection);

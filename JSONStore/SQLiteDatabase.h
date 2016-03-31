@@ -90,7 +90,7 @@
  @param sql The SQL statement(s) as a string
  @return Success (true) or failure (false)
  */
--(BOOL) insert: (NSString*) sql, ...;
+-(BOOL) insertStmt: (NSString*) sql, ...;
 
 /**
  Executes update SQL statements.
