@@ -18,7 +18,7 @@ The JSONStore SDK is available via [Cocoapods](http://cocoapods.org/). To instal
 
 # Security
 
-To use the encryption feature in JSONStore you will need to add the following to your project you will need the add the following to your `Link Binary with Libraries` in `Build Phases`:
+To use the encryption feature in JSONStore you will need to add the following to your project to your `Link Binary with Libraries` in `Build Phases`:
 
 ```Bash
 	SQLCipher.framework
@@ -30,7 +30,7 @@ Then call the following method at the beginning of your code
 	[[JSONStore sharedInstance] setEncryption:YES];
 ```
 
-For more information please visit this [blog]().
+For more information please visit this [blog]().).
 
 	 
 # Usage
