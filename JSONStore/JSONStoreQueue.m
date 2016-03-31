@@ -34,9 +34,10 @@ static JSONStoreQueue* _jsqSingleton = nil;
 }
 
 +(instancetype) sharedManagerWithUsername:(NSString*) username
+                                            withEncryption:(BOOL)encrypt
 {
     if (_jsqSingleton == nil) {
-        _jsqSingleton = [[JSONStoreQueue alloc] _initWithUsername:username];
+        _jsqSingleton = [[JSONStoreQueue alloc] _initWithUsername:username withEncryption:encrypt];
     }
     
     if (! [username isEqualToString:_jsqSingleton.username]) {
@@ -484,14 +485,17 @@ additionalIndexes:(NSDictionary*) additionalIndexes
 }
 
 -(instancetype) _initWithUsername:(NSString*) username
+                   withEncryption:(BOOL) encrypt
+
 {
     
     if (self = [super init]) {
         self.username = username;
         self.indexer = [[JSONStoreIndexer alloc] init];
         self.jsonSchemas = [[NSMutableDictionary alloc] init];
-        self.store = [[JSONStoreSQLLite alloc] initWithUsername:username];
-        self.operationQueue = dispatch_queue_create("com.worklight.jsonstore.operation", DISPATCH_QUEUE_SERIAL);
+        self.store = [[JSONStoreSQLLite alloc] initWithUsername:username withEncryption:encrypt];
+
+        self.operationQueue = dispatch_queue_create("com.jsonstore.operation", DISPATCH_QUEUE_SERIAL);
     }
     
     return self;

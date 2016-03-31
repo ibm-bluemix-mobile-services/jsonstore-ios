@@ -426,7 +426,7 @@
             
             if (! accessor) {
                 
-                accessor = [JSONStoreQueue sharedManagerWithUsername:JSON_STORE_DEFAULT_USER];
+                accessor = [JSONStoreQueue sharedManagerWithUsername:JSON_STORE_DEFAULT_USER withEncryption:self.encryption];
             }
             
             if (accessor && [self _destroyClearKeyChainAndCloseWithAccessor:accessor]) {
@@ -791,7 +791,7 @@
         username = JSON_STORE_DEFAULT_USER;
     }
     
-    accessor = [JSONStoreQueue sharedManagerWithUsername:username];
+    accessor = [JSONStoreQueue sharedManagerWithUsername:username withEncryption:self.encryption];
     
     if (! accessor) {
         
@@ -807,7 +807,6 @@
     }
     
     
-#if USE_SQLCIPHER
     if ([password length]) {
         
         rc = [[JSONStoreMigrationManager sharedInstance] checkForSecurityUpgrade:username
@@ -828,9 +827,6 @@
             return JSON_STORE_PROVISION_KEY_FAILURE;
         }
     }
-#else 
-    NSLog(@"ENCRYPTION IS DISABLED");
-#endif
     
     if (rc == 0) {
         

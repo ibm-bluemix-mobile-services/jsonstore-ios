@@ -19,4 +19,7 @@
 #import <JSONStore/JSONStoreAddOptions.h>
 #import <JSONStore/JSONStoreQueryPart.h>
 #import <JSONStore/JSONStoreQueryOptions.h>
+#import <JSONStore/JSONStoreConstants.h>
+#import <JSONStore/JSONStoreValidator.h>
+#import <JSONStore/JSONStoreSecurityManager.h>
 

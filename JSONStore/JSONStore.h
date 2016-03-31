@@ -26,6 +26,10 @@
 @property (nonatomic, strong) NSMutableDictionary* _accessors;
 
 /**
+ Private. True when encryption is enabled
+ */
+@property (nonatomic) BOOL encryption;
+/**
  Private. Boolean that determines if analytics are logged or not.
  */
 @property (nonatomic) BOOL _analytics;
@@ -81,6 +85,18 @@
  */
 -(BOOL) destroyDataAndReturnError:(NSError**) error;
 
+/**
+ Changes the password that is associated with the security artifacts that are used to provide data encryption.
+ @param oldPassword Old password
+ @param newPassword New password
+ @param username Username
+ @param error Error
+ @return Boolean that indicates the operation failed (false) or succeeded (true)
+ */
+-(BOOL) changeCurrentPassword: (NSString*) oldPassword
+              withNewPassword: (NSString*) newPassword
+                  forUsername: (NSString*) username
+                        error: (NSError**) error;
 
 /**
  Returns information about the file that is used to persist data in the store.
@@ -119,6 +135,14 @@
  Private. NSString for the message to be presented to user if OS Security is enabled
  */
 @property (nonatomic) NSString* _operatingSystemSecurityMessage;
+
+/**
+ Private, checks if the store is encrypted or not.
+ @return Boolean indicating if the store is encrypted or not
+ @private
+ */
+-(BOOL) _isStoreEncryptedAndReturnError:(NSError**) error;
+
 
 
 @end

@@ -5,6 +5,9 @@ framework module JSONStore { umbrella header "JSONStoreFramework.h"
     header "JSONStoreAddOptions.h"
     header "JSONStoreQueryPart.h"
     header "JSONStoreQueryOptions.h"
+    header "JSONStoreConstants.h"
+    header "JSONStoreSecurityManager.h"
+    header "JSONStoreValidator.h"
     
     export * module * { export * } }
 

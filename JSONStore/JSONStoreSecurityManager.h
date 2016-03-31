@@ -15,13 +15,11 @@
 
 /**
  Contains JSONStore methods to handle security.
- @since IBM Worklight V6.2.0
  */
 @interface JSONStoreSecurityManager : NSObject
 
 /**
  User name that is tied to the JSONStoreSecurityManager instance.
- @since IBM Worklight V6.2.0
  */
 @property (nonatomic, readonly, strong) NSString* username;
 
@@ -29,7 +27,6 @@
  Initialization method.
  @param username User name that is tied to the instance
  @return self
- @since IBM Worklight V6.2.0
  */
 -(instancetype) initWithUsername:(NSString*) username;
 
@@ -37,7 +34,6 @@
  Returns the decrypted Data Protection Key (DPK) from the keychain.
  @param password Password used to decrypt the DPK
  @return The DPK
- @since IBM Worklight V6.2.0
  */
 -(NSString*) getDPK:(NSString*) password;
 
@@ -48,7 +44,6 @@
  @param password Password used to encrypt the DPK, it is the derived user password in clear text
  @param salt The salt
  @return Success (true) or failure (false)
- @since IBM Worklight V6.2.0
  */
 -(BOOL) storeDPK:(NSString*) clearDPK
    usingPassword:(NSString*) password
@@ -59,7 +54,6 @@
  @param password Password used for the Client Based Key (CBK) to encrypt the DPK
  @param salt The salt
  @return Success (true) or failure (false)
- @since IBM Worklight V6.2.0
  */
 -(BOOL) generateAndStoreDpkUsingPassword:(NSString*) password
                                 withSalt:(NSString*) salt;
@@ -68,14 +62,12 @@
  Checks if the encrypted Data Protection Key (DPK) is inside the keychain.
  If an old DPK identifier is found without the Bundle ID appended, it is copied to a new DPK with the new naming scheme.
  @return True if the encrypted DPK is inside the keychain, false otherwise
- @since IBM Worklight V6.2.0
  */
 -(BOOL) isKeyChainFullyPopulated;
 
 /**
  Clears JSONStore security metadata from the keychain.
  @return Success (true) or failure (false)
- @since IBM Worklight V6.2.0
  */
 -(BOOL) clearKeyChain;
 
@@ -84,7 +76,6 @@
  @param oldPW Old password
  @param newPW New password
  @return Success (true) or failure (false)
- @since IBM Worklight V6.2.0
  */
 -(BOOL) changeOldPassword:(NSString*) oldPW
             toNewPassword:(NSString*) newPW;
@@ -92,7 +83,6 @@
 /**
  Private. Returns the salt.
  @return Salt
- @since IBM Worklight V6.2.0
  @private
  */
 -(NSString*) _getSalt;
@@ -100,7 +90,6 @@
 /**
  Private. Returns the IV.
  @return IV
- @since IBM Worklight V6.2.0
  @private
  */
 -(NSString*) _getIV;
@@ -110,7 +99,6 @@
  Used to create unique Data Protection Keys to prevent collision of identical jsonstore usernames on shared keychains.
  @param username The jsonstore name to append to
  @return NSString The new jsonstore username with the app ID appended
- @since IBM Worklight V6.1.0
  @private
  */
 +(NSString*) _dpkIdentifierWithBundleId;

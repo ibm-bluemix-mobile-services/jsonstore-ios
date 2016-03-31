@@ -6,14 +6,30 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		5F3B49E61CAACEA1001EA3E1 /* JSONStore-Universal */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 5F3B49E91CAACEA1001EA3E1 /* Build configuration list for PBXAggregateTarget "JSONStore-Universal" */;
+			buildPhases = (
+				5F3B49EA1CAACEBC001EA3E1 /* Run Script */,
+			);
+			dependencies = (
+			);
+			name = "JSONStore-Universal";
+			productName = "JSONStore-Universal";
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		5F3B47191CA2FE92001EA3E1 /* JSONStoreSecurityConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F3B47131CA2FE92001EA3E1 /* JSONStoreSecurityConstants.h */; };
 		5F3B471A1CA2FE92001EA3E1 /* JSONStoreSecurityConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B47141CA2FE92001EA3E1 /* JSONStoreSecurityConstants.m */; };
 		5F3B471B1CA2FE92001EA3E1 /* JSONStoreSecurityUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F3B47151CA2FE92001EA3E1 /* JSONStoreSecurityUtils.h */; };
 		5F3B471C1CA2FE92001EA3E1 /* JSONStoreSecurityUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B47161CA2FE92001EA3E1 /* JSONStoreSecurityUtils.m */; };
-		5F3B471D1CA2FE92001EA3E1 /* JSONStoreSecurityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F3B47171CA2FE92001EA3E1 /* JSONStoreSecurityManager.h */; };
+		5F3B471D1CA2FE92001EA3E1 /* JSONStoreSecurityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F3B47171CA2FE92001EA3E1 /* JSONStoreSecurityManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5F3B471E1CA2FE92001EA3E1 /* JSONStoreSecurityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B47181CA2FE92001EA3E1 /* JSONStoreSecurityManager.m */; };
 		5F3B47221CA30510001EA3E1 /* JSONStoreLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F3B47211CA30510001EA3E1 /* JSONStoreLogger.h */; };
+		5F5B87451CAC5BC500C0FCAA /* SQLiteDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F5B87441CAC5BC500C0FCAA /* SQLiteDatabase.h */; };
+		5F5B877C1CAC7C0000C0FCAA /* SQLiteDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F6E1D611CAB32C200D4D872 /* SQLiteDatabase.m */; };
 		5FC3263E1C89FF5200701994 /* JSONStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FC3263D1C89FF5200701994 /* JSONStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5FC326451C89FF5200701994 /* JSONStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FC3263A1C89FF5200701994 /* JSONStore.framework */; };
 		5FC3264A1C89FF5200701994 /* JSONStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC326491C89FF5200701994 /* JSONStoreTests.m */; };
@@ -31,16 +47,13 @@
 		5FC326901C8A008F00701994 /* JSONStoreSchema.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FC3267D1C8A008F00701994 /* JSONStoreSchema.h */; };
 		5FC326911C8A008F00701994 /* JSONStoreSchema.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC3267E1C8A008F00701994 /* JSONStoreSchema.m */; };
 		5FC326921C8A008F00701994 /* JSONStore+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FC3267F1C8A008F00701994 /* JSONStore+Private.h */; };
-		5FC326931C8A008F00701994 /* JSONStoreCollection+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FC326801C8A008F00701994 /* JSONStoreCollection+Private.h */; };
-		5FC326941C8A008F00701994 /* JSONStoreConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FC326811C8A008F00701994 /* JSONStoreConstants.h */; };
+		5FC326941C8A008F00701994 /* JSONStoreConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FC326811C8A008F00701994 /* JSONStoreConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5FC326951C8A008F00701994 /* JSONStoreConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC326821C8A008F00701994 /* JSONStoreConstants.m */; };
-		5FC326961C8A008F00701994 /* JSONStoreDatabaseManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FC326831C8A008F00701994 /* JSONStoreDatabaseManager.h */; };
-		5FC326971C8A008F00701994 /* JSONStoreDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC326841C8A008F00701994 /* JSONStoreDatabaseManager.m */; };
 		5FC326981C8A008F00701994 /* JSONStoreQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FC326851C8A008F00701994 /* JSONStoreQueue.h */; };
 		5FC326991C8A008F00701994 /* JSONStoreQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC326861C8A008F00701994 /* JSONStoreQueue.m */; };
 		5FC3269A1C8A008F00701994 /* JSONStoreSQLLite.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FC326871C8A008F00701994 /* JSONStoreSQLLite.h */; };
 		5FC3269B1C8A008F00701994 /* JSONStoreSQLLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC326881C8A008F00701994 /* JSONStoreSQLLite.m */; };
-		5FC3269C1C8A008F00701994 /* JSONStoreValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FC326891C8A008F00701994 /* JSONStoreValidator.h */; };
+		5FC3269C1C8A008F00701994 /* JSONStoreValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FC326891C8A008F00701994 /* JSONStoreValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5FC3269D1C8A008F00701994 /* JSONStoreValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC3268A1C8A008F00701994 /* JSONStoreValidator.m */; };
 		5FC3269E1C8A008F00701994 /* JSONStoreMigrationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FC3268B1C8A008F00701994 /* JSONStoreMigrationManager.h */; };
 		5FC3269F1C8A008F00701994 /* JSONStoreMigrationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC3268C1C8A008F00701994 /* JSONStoreMigrationManager.m */; };
@@ -75,6 +88,8 @@
 		5F3B47211CA30510001EA3E1 /* JSONStoreLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONStoreLogger.h; sourceTree = "<group>"; };
 		5F3B476B1CA322B9001EA3E1 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = SOURCE_ROOT; };
 		5F3B49791CA59F72001EA3E1 /* SQLCipher.framework */ = {isa = PBXFileReference; lastKnownFileType = text; name = SQLCipher.framework; path = ../XcodeWorkspace/SQLCipher.framework; sourceTree = "<group>"; };
+		5F5B87441CAC5BC500C0FCAA /* SQLiteDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLiteDatabase.h; sourceTree = "<group>"; };
+		5F6E1D611CAB32C200D4D872 /* SQLiteDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLiteDatabase.m; sourceTree = "<group>"; };
 		5FC3263A1C89FF5200701994 /* JSONStore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JSONStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FC3263D1C89FF5200701994 /* JSONStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONStore.h; sourceTree = "<group>"; };
 		5FC3263F1C89FF5200701994 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -95,11 +110,8 @@
 		5FC3267D1C8A008F00701994 /* JSONStoreSchema.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONStoreSchema.h; sourceTree = "<group>"; };
 		5FC3267E1C8A008F00701994 /* JSONStoreSchema.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONStoreSchema.m; sourceTree = "<group>"; };
 		5FC3267F1C8A008F00701994 /* JSONStore+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JSONStore+Private.h"; sourceTree = "<group>"; };
-		5FC326801C8A008F00701994 /* JSONStoreCollection+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JSONStoreCollection+Private.h"; sourceTree = "<group>"; };
 		5FC326811C8A008F00701994 /* JSONStoreConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONStoreConstants.h; sourceTree = "<group>"; };
 		5FC326821C8A008F00701994 /* JSONStoreConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONStoreConstants.m; sourceTree = "<group>"; };
-		5FC326831C8A008F00701994 /* JSONStoreDatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONStoreDatabaseManager.h; sourceTree = "<group>"; };
-		5FC326841C8A008F00701994 /* JSONStoreDatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONStoreDatabaseManager.m; sourceTree = "<group>"; };
 		5FC326851C8A008F00701994 /* JSONStoreQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONStoreQueue.h; sourceTree = "<group>"; };
 		5FC326861C8A008F00701994 /* JSONStoreQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONStoreQueue.m; sourceTree = "<group>"; };
 		5FC326871C8A008F00701994 /* JSONStoreSQLLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONStoreSQLLite.h; sourceTree = "<group>"; };
@@ -197,7 +209,11 @@
 		5FC3266A1C8A000500701994 /* Public */ = {
 			isa = PBXGroup;
 			children = (
+				5FC326891C8A008F00701994 /* JSONStoreValidator.h */,
+				5FC3268A1C8A008F00701994 /* JSONStoreValidator.m */,
 				5FFF9E201C8BABB900F79A1B /* JSONStoreOpenOptions.h */,
+				5FC326821C8A008F00701994 /* JSONStoreConstants.m */,
+				5FC326811C8A008F00701994 /* JSONStoreConstants.h */,
 				5FFF9E211C8BABB900F79A1B /* JSONStoreOpenOptions.m */,
 				5FC3263D1C89FF5200701994 /* JSONStore.h */,
 				5FC326581C89FFDD00701994 /* JSONStoreCollection.h */,
@@ -223,20 +239,15 @@
 				5FC3267D1C8A008F00701994 /* JSONStoreSchema.h */,
 				5FC3267E1C8A008F00701994 /* JSONStoreSchema.m */,
 				5FC3267F1C8A008F00701994 /* JSONStore+Private.h */,
-				5FC326801C8A008F00701994 /* JSONStoreCollection+Private.h */,
-				5FC326811C8A008F00701994 /* JSONStoreConstants.h */,
-				5FC326821C8A008F00701994 /* JSONStoreConstants.m */,
-				5FC326831C8A008F00701994 /* JSONStoreDatabaseManager.h */,
-				5FC326841C8A008F00701994 /* JSONStoreDatabaseManager.m */,
 				5FC326851C8A008F00701994 /* JSONStoreQueue.h */,
 				5FC326861C8A008F00701994 /* JSONStoreQueue.m */,
 				5FC326871C8A008F00701994 /* JSONStoreSQLLite.h */,
 				5FC326881C8A008F00701994 /* JSONStoreSQLLite.m */,
-				5FC326891C8A008F00701994 /* JSONStoreValidator.h */,
-				5FC3268A1C8A008F00701994 /* JSONStoreValidator.m */,
 				5FC3268B1C8A008F00701994 /* JSONStoreMigrationManager.h */,
 				5FC3268C1C8A008F00701994 /* JSONStoreMigrationManager.m */,
 				5FC326AF1C8A029300701994 /* JSONStoreMarcos.h */,
+				5F6E1D611CAB32C200D4D872 /* SQLiteDatabase.m */,
+				5F5B87441CAC5BC500C0FCAA /* SQLiteDatabase.h */,
 			);
 			name = Internal;
 			sourceTree = "<group>";
@@ -286,18 +297,17 @@
 				5FC326661C89FFDD00701994 /* JSONStoreQueryPart.h in Headers */,
 				5FC326641C89FFDD00701994 /* JSONStoreAddOptions.h in Headers */,
 				5FC326621C89FFDD00701994 /* JSONStoreCollection.h in Headers */,
-				5FFF9E2F1C8F81A500F79A1B /* JSONStoreFramework.h in Headers */,
-				5FC326A91C8A00C100701994 /* NSObject+WLJSON.h in Headers */,
+				5F3B471D1CA2FE92001EA3E1 /* JSONStoreSecurityManager.h in Headers */,
+				5FC3269C1C8A008F00701994 /* JSONStoreValidator.h in Headers */,
 				5FC326941C8A008F00701994 /* JSONStoreConstants.h in Headers */,
+				5FFF9E2F1C8F81A500F79A1B /* JSONStoreFramework.h in Headers */,
+				5F5B87451CAC5BC500C0FCAA /* SQLiteDatabase.h in Headers */,
+				5FC326A91C8A00C100701994 /* NSObject+WLJSON.h in Headers */,
 				5FC326AB1C8A00C100701994 /* NSString+WLJSON.h in Headers */,
 				5FC326981C8A008F00701994 /* JSONStoreQueue.h in Headers */,
-				5F3B471D1CA2FE92001EA3E1 /* JSONStoreSecurityManager.h in Headers */,
-				5FC326931C8A008F00701994 /* JSONStoreCollection+Private.h in Headers */,
 				5F3B471B1CA2FE92001EA3E1 /* JSONStoreSecurityUtils.h in Headers */,
 				5FC3268E1C8A008F00701994 /* JSONStoreIndexer.h in Headers */,
 				5FC3269E1C8A008F00701994 /* JSONStoreMigrationManager.h in Headers */,
-				5FC326961C8A008F00701994 /* JSONStoreDatabaseManager.h in Headers */,
-				5FC3269C1C8A008F00701994 /* JSONStoreValidator.h in Headers */,
 				5FC326921C8A008F00701994 /* JSONStore+Private.h in Headers */,
 				5FC326901C8A008F00701994 /* JSONStoreSchema.h in Headers */,
 				5FC3269A1C8A008F00701994 /* JSONStoreSQLLite.h in Headers */,
@@ -354,6 +364,9 @@
 			attributes = {
 				LastUpgradeCheck = 0720;
 				TargetAttributes = {
+					5F3B49E61CAACEA1001EA3E1 = {
+						CreatedOnToolsVersion = 7.2;
+					};
 					5FC326391C89FF5200701994 = {
 						CreatedOnToolsVersion = 7.2;
 					};
@@ -376,6 +389,7 @@
 			targets = (
 				5FC326391C89FF5200701994 /* JSONStore */,
 				5FC326431C89FF5200701994 /* JSONStoreTests */,
+				5F3B49E61CAACEA1001EA3E1 /* JSONStore-Universal */,
 			);
 		};
 /* End PBXProject section */
@@ -397,15 +411,32 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5F3B49EA1CAACEBC001EA3E1 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Config\nUFW_TARGET=JSONStore\n\n# Default build dir\nUFW_BUILD_DIR=\"Build\"\n\n# Global vars\n\nif [ -z ${SDK_NAME} ]; then\n# Use the latest iphoneos SDK available\nUFW_GREP_RESULT=$(xcodebuild -showsdks | grep -o \"iphoneos.*$\")\nwhile read -r line; do\nUFW_SDK_VERSION=\"${line}\"\ndone <<< \"${UFW_GREP_RESULT}\"\nelse\n# Use the SDK specified by XCode\nUFW_SDK_VERSION=\"${SDK_NAME}\"\nfi\n\nUFW_SDK_VERSION=$(echo \"${UFW_SDK_VERSION}\" | grep -o \"[0-9].*$\")\n\nUFW_IPHONE_DIR=\"${UFW_BUILD_DIR}/${CONFIGURATION}-iphoneos\"\nUFW_SIMULATOR_DIR=\"${UFW_BUILD_DIR}/${CONFIGURATION}-iphonesimulator\"\nUFW_UNIVERSAL_DIR=\"${UFW_BUILD_DIR}/${CONFIGURATION}-universal\"\n\n# Static lib name\nSTATIC_LIB_NAME=\"JSONStore\"\nUFW_FRAMEWORK_DIR=\"${STATIC_LIB_NAME}.framework\"\n\n# Build Framework\nrm -rf ${UFW_FRAMEWORK_DIR}\n\nxcodebuild ARCHS=\"armv7 armv7s arm64\" -target \"${UFW_TARGET}\" -configuration ${CONFIGURATION} -sdk iphoneos${UFW_SDK_VERSION} clean build RUN_CLANG_STATIC_ANALYZER=NO\n\nif [ \"$?\" != \"0\" ]; then echo >&2 \"Error: xcodebuild failed\"; exit 1; fi\n\nxcodebuild ARCHS=\"i386 x86_64\" -target \"${UFW_TARGET}\" -configuration ${CONFIGURATION} -sdk iphonesimulator${UFW_SDK_VERSION} clean build RUN_CLANG_STATIC_ANALYZER=NO\n\nif [ \"$?\" != \"0\" ]; then echo >&2 \"Error: xcodebuild failed\"; exit 1; fi\n\nmkdir -p \"${UFW_UNIVERSAL_DIR}\"\nmkdir -p \"${UFW_UNIVERSAL_DIR}/${UFW_FRAMEWORK_DIR}\"\nmkdir -p \"${UFW_UNIVERSAL_DIR}/${UFW_FRAMEWORK_DIR}/Headers\"\n\n#copy all framework content\ncp -a \"${UFW_IPHONE_DIR}/${UFW_FRAMEWORK_DIR}/.\" \"${UFW_UNIVERSAL_DIR}/${UFW_FRAMEWORK_DIR}/\"\n\necho \"running lipo -create -ouput...\"\n\nlipo \"${UFW_SIMULATOR_DIR}/${UFW_FRAMEWORK_DIR}/${STATIC_LIB_NAME}\" \"${UFW_IPHONE_DIR}/${UFW_FRAMEWORK_DIR}/${STATIC_LIB_NAME}\" -create -output \"${UFW_UNIVERSAL_DIR}/${UFW_FRAMEWORK_DIR}/${STATIC_LIB_NAME}\"\nif [ \"$?\" != \"0\" ]; then echo >&2 \"Error: lipo failed for ${STATIC_LIB_NAME}\"; exit 1; fi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5FC326351C89FF5200701994 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F5B877C1CAC7C0000C0FCAA /* SQLiteDatabase.m in Sources */,
 				5FC326651C89FFDD00701994 /* JSONStoreAddOptions.m in Sources */,
 				5F3B471C1CA2FE92001EA3E1 /* JSONStoreSecurityUtils.m in Sources */,
 				5FC3269F1C8A008F00701994 /* JSONStoreMigrationManager.m in Sources */,
-				5FC326971C8A008F00701994 /* JSONStoreDatabaseManager.m in Sources */,
 				5FC326671C89FFDD00701994 /* JSONStoreQueryPart.m in Sources */,
 				5FC326A81C8A00C100701994 /* NSData+WLJSON.m in Sources */,
 				5FC3268F1C8A008F00701994 /* JSONStoreIndexer.m in Sources */,
@@ -444,6 +475,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		5F3B49E71CAACEA1001EA3E1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		5F3B49E81CAACEA1001EA3E1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		5FC3264C1C89FF5200701994 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -535,6 +580,11 @@
 		5FC3264F1C89FF5200701994 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"ARCHS[sdk=iphoneos*]" = "$(ARCHS_STANDARD)";
+				"ARCHS[sdk=iphonesimulator*]" = (
+					x86_64,
+					i386,
+				);
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -549,10 +599,12 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = mh_dylib;
 				MODULEMAP_FILE = "$(PROJECT_DIR)/module.modulemap";
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-l\"sqlite3\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ios.jsonstore.JSONStore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64 i386";
 			};
 			name = Debug;
 		};
@@ -577,6 +629,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ios.jsonstore.JSONStore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64 i386";
 			};
 			name = Release;
 		};
@@ -603,6 +656,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5F3B49E91CAACEA1001EA3E1 /* Build configuration list for PBXAggregateTarget "JSONStore-Universal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5F3B49E71CAACEA1001EA3E1 /* Debug */,
+				5F3B49E81CAACEA1001EA3E1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		5FC326341C89FF5200701994 /* Build configuration list for PBXProject "JSONStore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

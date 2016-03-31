@@ -49,9 +49,11 @@
 /**
  Returns an instance of self that is initialized with a specific user name. This method must be called first to set the user name, otherwise you will get an exception from sharedManager.
  @param username User name that is tied to the singleton
+ @param withEncryption True when using encyrption;
  @return self
  */
-+(instancetype) sharedManagerWithUsername:(NSString*) username;
++(instancetype) sharedManagerWithUsername:(NSString*) username
+                                         withEncryption:(BOOL) encrypt;
 
 /**
  Returns an instance of self, this is a singleton that is tied to a specific user name. Use this method to get a singleton instance.
@@ -84,6 +86,7 @@ additionalIndexes:(NSDictionary*) additionalIndexes
 -(int) provisionCollection:(NSString*) collectionName
                 withSchema:(NSDictionary*) schema
     additionalSearchFields:(NSDictionary*) addFields;
+
 
 /**
  Locates documents inside a collection using query parts.

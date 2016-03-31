@@ -17,7 +17,6 @@
 #import "JSONStore+Private.h"
 #import "JSONStoreConstants.h"
 #import "JSONStoreCollection.h"
-#import "JSONStoreCollection+Private.h"
 
 
 

@@ -20,16 +20,27 @@
 #import "JSONStoreQueryPart.h"
 #import "JSONStoreValidator.h"
 #import "NSObject+WLJSON.h"
+#import "SQLiteDatabase.h"
+
 
 @implementation JSONStoreSQLLite
 
 #pragma mark Public API
 
--(instancetype) initWithUsername:(NSString*) username
+-(instancetype) initWithUsername:(NSString*) username withEncryption:(BOOL)encrypt
 {
     if (self = [super init]) {
         self.username = username;
-        self.dbMgr = [[JSONStoreDatabaseManager alloc] initWithUserName:username];
+        self.isEncrypt = encrypt;
+        if(self.isEncrypt){
+            id sqlite = [NSClassFromString(@"SQLCipherDatabase")alloc];
+            self.dbMgr = [sqlite performSelector:NSSelectorFromString(@"initWithUserName:") withObject:self.username];
+        } else {
+            id sqlite = [NSClassFromString(@"SQLiteDatabase")alloc];
+            self.dbMgr = [sqlite performSelector:NSSelectorFromString(@"initWithUserName:") withObject:self.username];
+        }
+    
+
     }
     
     return self;
@@ -41,13 +52,21 @@
     int rc = 0;
     
     if (self.dbMgr == nil) {
-        self.dbMgr = [[JSONStoreDatabaseManager alloc] initWithUserName:self.username];
+        if(self.isEncrypt){
+            id sqlite = [NSClassFromString(@"SQLCipherDatabase")alloc];
+            self.dbMgr = [sqlite performSelector:NSSelectorFromString(@"initWithUsername:") withObject:self.username];
+        } else {
+            id sqlite = [NSClassFromString(@"SQLiteDatabase")alloc];
+            self.dbMgr = [sqlite performSelector:NSSelectorFromString(@"initWithUsername:") withObject:self.username];
+        }
     }
     
     NSString* createPref = [NSString stringWithFormat:@"create table '%@' ( _id INTEGER primary key autoincrement, ", collection];
     NSString* createSuf = @" json BLOB, _dirty REAL default 0, _deleted INTEGER default 0, _operation TEXT)";
     NSString* indexedColumns = [self _schemaFromDict:[schema getCombinedDictionary]];
     NSString* stmt = [NSString stringWithFormat:@"%@%@%@;", createPref, indexedColumns, createSuf];
+    
+
     
     if (! [self.dbMgr executeSchemaCreation:stmt]) {
         
@@ -94,7 +113,13 @@
     // collection here.  Note that the API in StoragePlugin does NOT support dropping a closed table
     // This is only supported via provision.
     if (self.dbMgr == nil) {
-        self.dbMgr = [[JSONStoreDatabaseManager alloc] initWithUserName:self.username];
+        if(self.isEncrypt){
+            id sqlite = [NSClassFromString(@"SQLCipherDatabase")alloc];
+            self.dbMgr = [sqlite performSelector:NSSelectorFromString(@"initWithUsername:") withObject:self.username];
+        } else{
+            id sqlite = [NSClassFromString(@"SQLiteDatabase")alloc];
+            self.dbMgr = [sqlite performSelector:NSSelectorFromString(@"initWithUsername:") withObject:self.username];
+        }
     }
     
     NSString* dropStmt = [NSString stringWithFormat:@"drop table if exists '%@'", collection];
@@ -165,7 +190,13 @@
 -(int) destroyDbDirectory
 {
     if (self.dbMgr == nil) {
-        self.dbMgr = [[JSONStoreDatabaseManager alloc] initWithUserName:self.username];
+        if(self.isEncrypt){
+            id sqlite = [NSClassFromString(@"SQLCipherDatabase")alloc];
+            self.dbMgr = [sqlite performSelector:NSSelectorFromString(@"initWithUsername:") withObject:self.username];
+        } else {
+            id sqlite = [NSClassFromString(@"SQLiteDatabase")alloc];
+            self.dbMgr = [sqlite performSelector:NSSelectorFromString(@"initWithUsername:") withObject:self.username];
+        }
     }
     
     NSString* dbDirPath = [self.dbMgr getJsonStoreDirectoryPath];
@@ -653,7 +684,8 @@ inCollection:(NSString*) collection
         if (!self.dbHasBeenKeyed) {
 
             if (self.dbMgr == nil) {
-                self.dbMgr = [[JSONStoreDatabaseManager alloc] initWithUserName:self.username];
+                id sqlite = [NSClassFromString(@"SQLCipherDatabase")alloc];
+                self.dbMgr = [sqlite performSelector:NSSelectorFromString(@"initWithUserName:") withObject:self.username];
             }
 
             NSString* pragmaKey = [NSString stringWithFormat:@"PRAGMA key = \"x'%@'\";", encKey];
@@ -683,7 +715,7 @@ inCollection:(NSString*) collection
 
 -(BOOL) close
 {
-    BOOL closed = [self.dbMgr close];
+    BOOL closed = [self.dbMgr closeDB];
     self.dbMgr = nil;
     self.dbHasBeenKeyed = NO;
     return closed;

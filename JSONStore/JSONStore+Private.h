@@ -18,13 +18,6 @@
 @interface JSONStore()
 
 /**
- Private, checks if the store is encrypted or not.
- @return Boolean indicating if the store is encrypted or not
- @private
- */
--(BOOL) _isStoreEncryptedAndReturnError:(NSError**) error;
-
-/**
  Private, removes an accessor, does nothing if the collection was never opened.
  @param collectionName Name of the collection
  @private

@@ -14,7 +14,6 @@
 #import <Foundation/Foundation.h>
 #import "JSONStoreSchema.h"
 #import "JSONStoreQueryOptions.h"
-#import "JSONStoreDatabaseManager.h"
 
 /**
  Query builder that communicates with the Database Manager.
@@ -29,19 +28,27 @@
 /**
  Instance of a Database Manager object.
  */
-@property (nonatomic, strong) JSONStoreDatabaseManager* dbMgr;
+@property (nonatomic, strong) id dbMgr;
 
 /**
  True when a valid key has been passed to the store.
  */
 @property (nonatomic) BOOL dbHasBeenKeyed;
 
+
+/**
+True when using encryption
+*/
+@property (nonatomic) BOOL isEncrypt;
+
 /**
  Returns an instance of self that is initialized with a specific user name.
  @param username User name that is tied to the singleton
+ @param withEncryption True when using encryption
  @return self
  */
--(instancetype) initWithUsername:(NSString*) username;
+-(instancetype) initWithUsername:(NSString*) username
+                  withEncryption:(BOOL) encrypt;
 
 /**
  Adds data to a collection as documents.
