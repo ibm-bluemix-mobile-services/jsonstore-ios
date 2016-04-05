@@ -12,7 +12,7 @@ author:
 
 
 # Overview 
-JSONStore  is a lightweight , document-oriented storage system that enables persistent storage of JSON documents for Android applications. Recently, this framework has been released as an open source framework. By default, the security features has been disabled. To enable the security features you will to do some few things to get security working. By the end of this blog you will have a JSONStore framework that is secured for your project.
+JSONStore is a lightweight , document-oriented storage system that enables persistent storage of JSON documents for Android applications. Recently, this framework has been released as an open source framework. By default, the security features has been disabled. To enable the security features you will to do some few things to get security working. By the end of this blog you will have a JSONStore framework that is secured for your project.
 
 ## Android
 
