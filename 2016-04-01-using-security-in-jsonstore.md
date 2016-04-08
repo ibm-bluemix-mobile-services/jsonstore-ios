@@ -12,106 +12,75 @@ author:
 
 
 # Overview 
-JSONStore is a lightweight , document-oriented storage system that enables persistent storage of JSON documents for Android applications. Recently, this framework has been released as an open source framework. By default, the security features has been disabled. To enable the security features you will to do some few things to get security working. By the end of this blog you will have a JSONStore framework that is secured for your project.
+JSONStore is a lightweight , document-oriented storage system that enables persistent storage of JSON documents for Android applications. Recently, this framework has been released as an open source framework. IBM MobileFirst Platform Foundation provides libraries that allow to enable security features such as encryption and FIPS support in JSONStore. By the end of this blog you will have a JSONStore framework that is secured for your project.
 
-## Android
+## Android applications
 
-### Native
+#### Installing JSONStore
 
-#### Compilation
+In order to install JSONStore follow the step by step instructions described at [https://github.com/ibm-bluemix-mobile-services/jsonstore-android](https://github.com/ibm-bluemix-mobile-services/jsonstore-android)
 
+#### Enabling encryption and FIPS support
 
 First unzip the **jsonstore_encryption.zip** file and pull out the `Android` folder. You should see `jniLibs`, `libs`, and `assets` subdirectories. 
 
 Copy the contents of `libs` directory and paste them in your `libs` directory in your Anroid. Likewise, do the same for the `jniLibs` and `assets` directory. If you do not have an assets or jniLibs directory you can create them under `src/main`. 
 
-In your build.gradle make sure the following are included as dependencies.
+In your build.gradle make sure the following line is included under dependencies
 
 ```Gradle
-	compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'org.codehaus.jackson:jackson-jaxrs:1.9.13'
-    compile 'com.google.guava:guava:14.0.1'
-    compile 'com.ibm.mobilefirstplatform.clientsdk.android:jsonstore:+'
-        
+compile fileTree(dir: 'libs', include: ['*.jar'])
 ```
 
-If you get errors like *duplicate files copied in APK META-INF/XXXX* add the following to your `build.gradle`.
+Below screenshot shows the final file system layout after following the above instructions
 
-```Gradle
-	android {
-		packagingOptions {
-        	pickFirst 'META-INF/ASL2.0'
-        	pickFirst 'META-INF/LICENSE'
-        	pickFirst 'META-INF/NOTICE'
-    	}
-	}
-```
+![](EnablingJsonStoreSecurityAndroidStudio.png)
 
+Once all the required libraries are in place the last remaining thing to do is to call below method to enable encryption in your JSONStore application.
 
-![](https://developer.ibm.com/mobilefirstplatform/wp-content/uploads/sites/32/2016/03/Screen-Shot-2016-03-24-at-12.27.19-AM-271x300.png)
+```Java
+JSONStore.getInstance(getApplicationContext()).setEncryption(true)
+``` 
+Now you can use JSONStoreInitOptions instance to set username and password for encrypting your JSONStore collections. 
 
-*Android Assets and jniLibs directory*
+> To ensure that FIPS compliant encryption is enabled look for the below text in LogCat output
 
-Finally, in your code you will need to call `JSONStore.getInstance(getApplicationContext()).setEncryption(true)` to enable encryption in your JSONStore application.
+> ```
+> 04-08 19:56:42.566 13387-13387/? D/libuvpn: SSL Version=OpenSSL 1.0.1p-fips 9 Jul 2015
+> 04-08 19:56:42.566 13387-13387/? D/libuvpn: SSL Version=OpenSSL 1.0.1p-fips 9 Jul 2015
+> 04-08 19:56:42.626 13387-13387/? D/libuvpn:
+> ------------------------------------------------------
+> 											FIPS_mode initially 0, setting to 1
+> 04-08 19:56:42.626 13387-13387/? D/libuvpn: FIPS_mode_set succeeded
+> ------------------------------------------------------
+> ```
 
+## iOS applications
 
-### Hybrid
+#### Installing JSONStore
 
-#### Compilation
+In order to install JSONStore follow the step by step instructions described at [https://github.com/ibm-bluemix-mobile-services/jsonstore-ios](https://github.com/ibm-bluemix-mobile-services/jsonstore-ios)
 
-First, create a Cordova project. If you do not have Cordova you can install it [here](https://cordova.apache.org/).
+#### Enabling encryption and FIPS support
 
-```Bash
-	cordova create ${ProjectName}
-```
+First, add `SQLCipher.framework` and `libSQLCipherDatabase.a` to your `Link Binary with Libraries` in the `Build Phases` tab of your iOS project. You can find these files under the `iOS` folder when you unzip **jsonstore_encryption.zip**.
 
-Next, install the Android platform and plugin.
-
-```Bash
-	cordova platform add android
-	cordova plugin
-```
-Next, install the plugin
-
-```Bash
-	cordova install plugin cordova-plugin-jsonstore
-```
-
-
-As mentioned in the native portion, you will need to include the necessary `.so` and `.jar` files. 
-
-#### Usage
-
-In your code you will need to call the following in the begining of your code.
-
-```Javascript
-	JSONStore.setEncryption(true)
-```
-
-
-## iOS
-
-### Native
-
-#### Compiliation
-
-First, add `SQLCipher.framework` and `libSQLCipherDatabase.a` to your `Link Binary to with Libraries` in the `Build Phases` tab. You can find these files under the `iOS` folder when you unzip **jsonstore_encryption.zip**.
-
-#### Usage
-In your code you will need to call 
+Once all the required files are added call the below method in your iOS application
 
 ```Objective-C
-	[[JSONStore sharedInstance] setEncryption:YES];
+[[JSONStore sharedInstance] setEncryption:YES];
 ```
 
-### Hybrid
+### Cordova applications
 
-#### Compliation
-Follow the instructions noted in the hybrid portion for Android but add the `ios` platform
+#### Installing JSONStore
 
-```Bash
-	cordova platform add ios
+In order to install JSONStore Cordova plugin follow the step by step instructions described at [https://github.com/ibm-bluemix-mobile-services/jsonstore-cordova](https://github.com/ibm-bluemix-mobile-services/jsonstore-cordova)
+
+#### Enabling encryption and FIPS support
+
+Follow the instructions for adding files for native application. Once all the required files are added call the below method in your Cordovaq application
+
+```Javascript
+JSONStore.setEncryption(true)
 ```
-
-### Usage
-Follow the instructions noted in the hybrid portion for Android
