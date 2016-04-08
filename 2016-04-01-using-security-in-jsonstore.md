@@ -22,7 +22,7 @@ In order to install JSONStore follow the step by step instructions described at 
 
 #### Enabling encryption and FIPS support
 
-First unzip the **jsonstore_encryption.zip** file and pull out the `Android` folder. You should see `jniLibs`, `libs`, and `assets` subdirectories. 
+Unzip the **jsonstore_encryption.zip** file and pull out the `Android` folder. You should see `jniLibs`, `libs`, and `assets` subdirectories. 
 
 Copy the contents of `libs` directory and paste them in your `libs` directory in your Anroid. Likewise, do the same for the `jniLibs` and `assets` directory. If you do not have an assets or jniLibs directory you can create them under `src/main`. 
 
@@ -63,13 +63,36 @@ In order to install JSONStore follow the step by step instructions described at 
 
 #### Enabling encryption and FIPS support
 
-First, add `SQLCipher.framework` and `libSQLCipherDatabase.a` to your `Link Binary with Libraries` in the `Build Phases` tab of your iOS project. You can find these files under the `iOS` folder when you unzip **jsonstore_encryption.zip**.
+Remove the `sqlite3` pod from your Podspec file and run `pod install`
+
+Unzip the **jsonstore_encryption.zip** file and open the iOS folder found inside of it. 
+
+Drag and drop `SQLCipher.framework` and `libSQLCipherDatabase.a` fils from iOS folder to your iOS project in Xcode. When prompted make sure that the `Copy items if needed` checkbox is checked. 
+
+Open `Link Binary with Libraries` section in the `Build Phases` tab of your iOS project settings. Make sure that `SQLCipher.framework` and `libSQLCipherDatabase.a` are present. Add them if they're not. x
 
 Once all the required files are added call the below method in your iOS application
 
 ```Objective-C
 [[JSONStore sharedInstance] setEncryption:YES];
 ```
+> To ensure that FIPS compliant encryption is enabled execute the below command
+
+>```
+> NSLog(@"%@", [[JSONStore sharedInstance] fileInfoAndReturnError:nil]);
+>```
+
+> The Xcode console output should contain isEncrypted=1 property like shown on a snippet below
+
+> ```
+> 2016-04-08 14:54:45.789 JSONStoreTestIOS[48114:20123219] (
+>         {
+>         isEncrypted = 1;
+>         name = myname;
+>         size = 3072;
+>     }
+> )
+> ```
 
 ## Cordova applications
 
