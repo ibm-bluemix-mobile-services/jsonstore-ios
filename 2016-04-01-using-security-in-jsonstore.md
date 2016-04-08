@@ -71,7 +71,7 @@ Once all the required files are added call the below method in your iOS applicat
 [[JSONStore sharedInstance] setEncryption:YES];
 ```
 
-### Cordova applications
+## Cordova applications
 
 #### Installing JSONStore
 
