@@ -17,6 +17,11 @@ pod 'sqlite3'
 ```
 
 > Note that `sqlite3` library is a static library and it cannot be used in conjuction with dynamic frameworks. This means you will not be able to use the `use_frameworks!` Cocoapods flag. 
+
+## Security
+
+For more information about how to enable security please visit the following [blog](https://mobilefirstplatform.ibmcloud.com/blog/2016/04/01/using-security-in-jsonstore/). 
+
 	 
 ## Usage
 

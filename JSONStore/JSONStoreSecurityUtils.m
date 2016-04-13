@@ -134,7 +134,7 @@ static NSData *aes_decrypt(NSData *key, NSData *iv, NSData *ciphertext){
     return decryptedData;
 }
 
-+(NSString*) _generateKeyWithPassword: (NSString *) pass
++(NSString*) generateKeyWithPassword: (NSString *) pass
                               andSalt: (NSString *) salt
                         andIterations: (NSInteger) iterations
 {
@@ -182,6 +182,49 @@ static NSData *aes_decrypt(NSData *key, NSData *iv, NSData *ciphertext){
     return [NSString stringWithString:derivedKeyStr];
 }
 
++(NSDictionary*) _buildErrorObjectWithException:(NSException*) exception
+                                      andFormat:(NSString*) format
+{
+    NSString *msg = [NSString stringWithFormat:format, exception];
+    
+    NSDictionary* errorObject = @{JSONStore_ERR_MSG_KEY: msg};
+    
+    return errorObject;
+}
+
++(NSDictionary*) encryptText: (NSString*) text
+                     withKey: (NSString*) key
+                       error: (NSError**) error
+{
+    NSDictionary* dict = nil;
+    NSString* iv = [self generateRandomStringWithBytes:16];
+    
+    @try {
+        NSString* encryptedText = [self _encryptWithKey:key
+                                               withText:text
+                                                 withIV:iv
+                           covertBase64BeforeEncryption:NO];
+        
+        dict = @{JSONStore_CIPHER_TEXT_KEY: encryptedText,
+                 JSONStore_IV_KEY: iv,
+                 JSONStore_KEY_VERSION: @(JSONStore_CURRENT_SEC_VERSION),
+                 JSONStore_KEY_SRC: JSONStore_SRC_OBJECTIVE_C};
+    }
+    @catch (NSException *exception) {
+        
+        if (error != nil) {
+            
+            *error = [NSError errorWithDomain:JSONStore_ERROR_LABEL_ENCRYPT
+                                         code:-1
+                                     userInfo:[self _buildErrorObjectWithException:exception
+                                                                         andFormat:JSONStore_ENCRYPT_ERROR_FORMAT_MSG]];
+        }
+    }
+    
+    return dict;
+    
+}
+
 +(NSString*) _encryptWithKey:(NSString*) key
                     withText:(NSString*) text
                       withIV:(NSString*) iv
@@ -209,6 +252,45 @@ covertBase64BeforeEncryption:(BOOL) covertBase64BeforeEncryptionFlag
     NSString *encodedBase64CipherString  = [cipherDat base64EncodedStringWithOptions:0];
     
     return encodedBase64CipherString;
+}
+
++(NSString*) decryptWithKey: (NSString*) key
+              andDictionary:(NSDictionary*) dict
+                      error: (NSError**) error
+{
+    NSString* plainText = nil;
+    
+    @try {
+        
+        if (! [dict[JSONStore_KEY_SRC] isEqualToString:JSONStore_SRC_OBJECTIVE_C]) {
+            [NSException raise:JSONStore_ERROR_LABEL_DECRYPT format:@"%@", JSONStore_ERROR_MSG_INVALID_SRC];
+        }
+        
+        if ([dict[JSONStore_KEY_VERSION] intValue] != JSONStore_CURRENT_SEC_VERSION) {
+            [NSException raise:JSONStore_ERROR_LABEL_DECRYPT format:@"%@", JSONStore_ERROR_MSG_INVALID_VERSION];
+        }
+        
+        BOOL checkBase64 = [dict objectForKey:JSONStore_KEY_BASE64] ? [[dict objectForKey:JSONStore_KEY_BASE64] boolValue] : NO;
+        
+        plainText = [self _decryptWithKey:key
+                           withCipherText:dict[JSONStore_CIPHER_TEXT_KEY]
+                                   withIV:dict[JSONStore_IV_KEY]
+              decodeBase64AfterDecryption:NO
+                      checkBase64Encoding:checkBase64];
+        
+    }
+    @catch (NSException *exception) {
+        
+        if (error != nil) {
+            
+            *error = [NSError errorWithDomain:JSONStore_ERROR_LABEL_DECRYPT
+                                         code:-2
+                                     userInfo:[self _buildErrorObjectWithException:exception
+                                                                         andFormat:JSONStore_DECRYPT_ERROR_FORMAT_MSG]];
+        }
+    }
+    
+    return plainText;
 }
 
 /**

@@ -56,8 +56,30 @@ covertBase64BeforeEncryption:(BOOL) covertBase64BeforeEncryptionFlag;
  @param iterations The number of iterations that is passed to the key generation algorithm
  @return The generated key
 */
-+(NSString*) _generateKeyWithPassword: (NSString *) pass
++(NSString*) generateKeyWithPassword: (NSString *) pass
                              andSalt: (NSString *) salt
                        andIterations: (NSInteger) iterations;
 
+/**
+ Encrypts text with a key.
+ @param text The text to encrypt
+ @param key The key used for encryption
+ @param error Error
+ @return An NSDictionary with the cipher text (ct), the IV (iv), the source (src) and the version (v).
+ */
++(NSDictionary*) encryptText: (NSString*) text
+                     withKey: (NSString*) key
+                       error: (NSError**) error;
+
+/**
+ Decrypts a dictionary that contains: src (source), v (version), ct (cipher text) and the iv (initialization vector).
+ @param ciphertext The encrypted text to decrypt
+ @param key The key used for decryption
+ @param encryptedObj NSDictionary that is returned from encryptText:withKey:error:
+ @param error Error
+ @return The decrypted text
+ */
++(NSString*) decryptWithKey: (NSString*) key
+              andDictionary:(NSDictionary*) encryptedObj
+                      error: (NSError**) error;
 @end

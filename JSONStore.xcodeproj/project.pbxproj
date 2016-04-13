@@ -87,7 +87,6 @@
 		5F3B47181CA2FE92001EA3E1 /* JSONStoreSecurityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONStoreSecurityManager.m; sourceTree = "<group>"; };
 		5F3B47211CA30510001EA3E1 /* JSONStoreLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONStoreLogger.h; sourceTree = "<group>"; };
 		5F3B476B1CA322B9001EA3E1 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = SOURCE_ROOT; };
-		5F3B49791CA59F72001EA3E1 /* SQLCipher.framework */ = {isa = PBXFileReference; lastKnownFileType = text; name = SQLCipher.framework; path = ../XcodeWorkspace/SQLCipher.framework; sourceTree = "<group>"; };
 		5F5B87441CAC5BC500C0FCAA /* SQLiteDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLiteDatabase.h; sourceTree = "<group>"; };
 		5F6E1D611CAB32C200D4D872 /* SQLiteDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLiteDatabase.m; sourceTree = "<group>"; };
 		5FC3263A1C89FF5200701994 /* JSONStore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JSONStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -278,7 +277,6 @@
 		5FFF9E291C8E1ABA00F79A1B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5F3B49791CA59F72001EA3E1 /* SQLCipher.framework */,
 				5FFF9E271C8E1A1D00F79A1B /* libsqlite3.tbd */,
 			);
 			name = Frameworks;

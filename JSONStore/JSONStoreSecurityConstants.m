@@ -17,13 +17,18 @@
 
 int const JSONStorekChosenCipherIVSize = 16;
 int const JSONStorekChosenCipherKeySize = 32;
+int const JSONStore_CURRENT_SEC_VERSION = 1;
 
 NSString *const JSONStore_BASE64_REGEX = @"^[a-zA-Z0-9\\+=\\/]{%u}$";
+NSString *const JSONStore_KEY_BASE64 = @"base64";
 
 NSString *const JSONStore_ERROR_LABEL_KEYGEN = @"KEYGEN_ERROR";
 NSString *const JSONStore_ERROR_LABEL_ENCRYPT = @"ENCRYPT_ERROR";
 NSString *const JSONStore_ERROR_LABEL_DECRYPT = @"DECRYPT_ERROR";
 NSString *const JSONStore_ERROR_LABEL = @"ERROR";
+NSString *const JSONStore_ENCRYPT_ERROR_FORMAT_MSG = @"ENCRYPT_ERROR = %@";
+NSString *const JSONStore_DECRYPT_ERROR_FORMAT_MSG = @"DECRYPT_ERROR = %@";
+
 
 NSString *const JSONStore_ERROR_MSG_INVALID_IV_LENGTH = @"IV must be 32 hex characters or 16 bytes (128 bits)";
 
@@ -34,5 +39,18 @@ NSString *const JSONStore_ERROR_MSG_EMPTY_IV = @"Cannot encrypt with empty/nil i
 NSString *const JSONStore_ERROR_MSG_INVALID_ITERATIONS = @"Number of iterations must greater than 0";
 NSString *const JSONStore_ERROR_MSG_EMPTY_PASSWORD = @"Password cannot be nil/empty";
 NSString *const JSONStore_ERROR_MSG_EMPTY_SALT = @"Salt cannot be nil/empty";
+NSString *const JSONStore_ERROR_MSG_INVALID_SRC = @"Cannot decrypt something not encrypted in this environment";
+NSString *const JSONStore_ERROR_MSG_INVALID_VERSION = @"Cannot decrypt something with that version";
+
+NSString *const JSONStore_CIPHER_TEXT_KEY = @"ct";
+NSString *const JSONStore_IV_KEY = @"iv";
+NSString *const JSONStore_KEY_VERSION = @"v";
+NSString *const JSONStore_KEY_SRC = @"src";
+NSString *const JSONStore_SRC_OBJECTIVE_C = @"objc";
+NSString *const JSONStore_ERR_MSG_KEY = @"msg";
+
+
+
+
 
 @end

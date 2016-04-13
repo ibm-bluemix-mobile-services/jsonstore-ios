@@ -22,4 +22,5 @@
 #import <JSONStore/JSONStoreConstants.h>
 #import <JSONStore/JSONStoreValidator.h>
 #import <JSONStore/JSONStoreSecurityManager.h>
+#import <JSONStore/JSONStoreSecurityUtils.h>
 

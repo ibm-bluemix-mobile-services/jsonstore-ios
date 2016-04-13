@@ -218,7 +218,7 @@
 -(NSString*) _passwordToKey:(NSString*) password
                    withSalt:(NSString*) salt
 {
-    return [JSONStoreSecurityUtils _generateKeyWithPassword:password
+    return [JSONStoreSecurityUtils generateKeyWithPassword:password
                                              andSalt:salt
                                        andIterations:JSON_STORE_DEFAULT_PBKDF2_ITERATIONS];
 }
