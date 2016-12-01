@@ -26,6 +26,7 @@ Pod::Spec.new do |s|
 
   s.module_map = 'module.modulemap'
 
+  s.library = 'sqlite3'
   
 
 end
