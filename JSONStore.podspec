@@ -24,8 +24,8 @@ Pod::Spec.new do |s|
 
   s.requires_arc = true
 
-  s.module_map = 'module.modulemap'
-
+  s.module_map = 'JSONSStore.modulemap'
+  s.library = 'sqlite3'
   
 
 end
